@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>{% block title %}Accueil - Decouvelaere Frigos à Patates{% endblock %}</title>
+        <title>{% block title %}Decouvelaere Frigos à Patates{% endblock %}</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -19,6 +19,7 @@
         
     </head>
     <body>
+    {% block body %}
         <div class="d-flex" id="wrapper">
             <!-- Sidebar-->
             <div class="border-end bg-white" id="sidebar-wrapper">
@@ -70,7 +71,7 @@
                 </div>
             </div>
         </div>
-        {% block body %}{% endblock %}
+        {% endblock %}
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->

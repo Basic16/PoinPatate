@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+{% block title %} - Liste des producteurs{% endblock %}
+{% block content %}
+   
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <h1 class="text-center text-primary p-4">Liste des producteurs</h1>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-8 p-4 m-0 ">
+                    <div class="table-responsive">
+                        <table class="table table-hover" style="border:1px solid black;">
+                            <thead class="text-primary">
+                                <tr>
+                                    <th scope="col">
+                                        Nom
+                                    </th>
+                                    <th scope="col">
+                                        adresse
+                                    </th>
+                                   
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for producteur in producteurs %}
+                                    <tr class="{{ cycle(['table-primary'], loop.index0) }}">
+                                
+                                        <td>
+                                            {{producteur.nom |capitalize }}
+                                        </td>
+                                        <td>
+                                            {{producteur.adresse |capitalize }}
+                                        </td>
+                                        
+                                        <td>
+										<a href="{{path('liste_producteurs',{'supp':producteur.id})}}" class="text-white">
+											<span class="material-icons" title="Supprimer le producteur'">
+												delete
+											</span>
+										</a>
+									</td>
+
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

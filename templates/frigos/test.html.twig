@@ -7,20 +7,22 @@
 
 {% block content %}
     <div class="container-fluid">
-		<div class="row justify-content-center">
-			
-		</div>
-		
-	</div>
+        <main class="row">
+            <div class="col">
+                <h1 class="text-center" >Frigo 3</h1>
 
-      
+                <div id="table-container"></div>
+            </div>
+        </main>
+        <footer class="row">
+            <div class="col">
+                <hr>
+            </div>
+        </footer>
+    </div>
 
-
-{% endblock %}
-
-{% block javascripts %}
+    {% block javascripts %}
 	{{parent()}}
-
     <script>
         function format_link(link) {
             if (link)
@@ -29,11 +31,11 @@
         }
 
         CsvToHtmlTable.init({
-            csv_path: "../public/csv/MOCK_DATA.csv",
+            csv_path: "csv/Frigo3v2.csv",
             element: "table-container",
-            allow_download: true,
+            allow_download: false,
             csv_options: {
-                separator: ",",
+                separator: ";",
                 delimiter: '"'
             },
             datatables_options: {
@@ -44,5 +46,5 @@
             ]
         });
     </script>
-
+	{% endblock %}
 {% endblock %}

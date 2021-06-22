@@ -32,6 +32,11 @@ class Producteurs
     private $adresse;
 
     /**
+     * @ORM\Column(type="string", length=15)
+     */
+    private $telephone;
+
+    /**
      * @ORM\ManyToMany(targetEntity=Frigos::class, mappedBy="idProducteurs")
      */
     private $frigos;
@@ -70,6 +75,18 @@ class Producteurs
         return $this;
     }
 
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(string $telephone): self
+    {
+        $this->telephone = $telephone;
+
+        return $this;
+    }
+    
     /**
      * @return Collection|Frigos[]
      */

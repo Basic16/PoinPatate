@@ -20,23 +20,9 @@ class VarieteController extends AbstractController
        $variete = new Variete(); 
        $em = $this->getDoctrine();
        
-       $form = $this->createForm(AjoutVarieteType::class, $variete);
+       
        $repoVariete = $em->getRepository(Variete::class);
 
-       if ($request->isMethod('POST')) {
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-
-
-            $em = $this->getDoctrine()->getManager();
-
-            $em->persist($variete); // Nous enregistrons notre nouveau thème
-            $em->flush(); // Nous validons notre ajout
-            $this->addFlash('notice', 'Variété insérée'); // Nous préparons le message à
-
-        }
-        return $this->redirectToRoute('liste_varietes');
-    }
        if ($request->get('supp') != null) {
            $variete = $repoVariete->find($request->get('supp'));
            if ($variete != null) {
@@ -49,7 +35,7 @@ class VarieteController extends AbstractController
        $varietes = $repoVariete->findBy(array());
        return $this->render('variete/liste_variete.html.twig', [
            'varietes' => $varietes,
-           'form' => $form->createView() 
+           
            
        ]);
    }
@@ -79,6 +65,33 @@ class VarieteController extends AbstractController
         }
         return $this->render('variete/modif_variete.html.twig', [
             'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/ajout_variete", name="ajout_variete")
+     */
+    public function ajoutProducteur(Request $request)
+    {
+        $variete = new Variete(); 
+        $form = $this->createForm(AjoutVarieteType::class, $variete);
+
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+
+
+                $em = $this->getDoctrine()->getManager();
+
+                $em->persist($variete); 
+                $em->flush(); 
+                $this->addFlash('notice', 'Variété ajoutée'); 
+
+            }
+            return $this->redirectToRoute('ajout_variete');
+        }
+        return $this->render('variete/ajout_variete.html.twig', [
+            'form' => $form->createView() 
         ]);
     }
     

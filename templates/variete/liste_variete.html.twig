@@ -2,10 +2,27 @@
 {% block title %}{{parent()}} - Calibres{% endblock %}
 {% block content %}
    
+
+
+        
         <div class="container-fluid">
             <div class="row justify-content-center">
+            <div class="row justify-content-center">
+                <h3 class="text-center text-primary p-4">
+                    <form action="{{ path('ajout_variete')}}">
+                        <input class="btn btn-success" type="submit" value="Ajouter un producteur" />
+                    </form>
+                    
+            </h3>
+            </div>    
                 <h1 class="text-center text-primary p-4">Liste des variétés</h1>
+                
             </div>
+
+
+           
+
+
             <div class="row justify-content-center">
                 <div class="col-8 p-4 m-0 ">
                     <div class="table-responsive">
@@ -15,8 +32,12 @@
                                     <th scope="col">
                                         Nom
                                     </th>
-                                    
-                                   
+                                     <th scope="col">
+                                     
+                                    </th>
+                                    <th scope="col">
+                                     
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -29,13 +50,20 @@
                 
                                         
                                         <td>
-										<a href="{{path('liste_varietes',{'supp':variete.id})}}" class="text-white">
+										<a href="{{path('liste_varietes',{'supp':variete.id})}}" class="text-black">
 											<span class="material-icons" title="Supprimer la variété">
 												delete
 											</span>
 										</a>
 									</td>
-
+                                         <td>
+										<a href="{{path('modif_variete',{'id': variete.id})}}" class="text-black">
+											<span class="material-icons" title="Modifier une Variété">
+												create
+											</span>
+										</a>
+									    </td>
+                                        
                                     </tr>
                                 {% endfor %}
                             </tbody>

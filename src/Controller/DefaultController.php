@@ -20,5 +20,13 @@ class DefaultController extends AbstractController
         ]);
     }
 
-   
+   /**
+     * @Route("/test", name="test")
+     */
+    public function test(): Response
+    {
+        return $this->render('frigos/test.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
 }

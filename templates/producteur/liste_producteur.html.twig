@@ -4,11 +4,19 @@
    
         <div class="container-fluid">
             <div class="row justify-content-center">
+                <h3 class="text-center text-primary p-4">
+                    <form action="{{ path('ajout_producteur')}}">
+                        <input class="btn btn-success" type="submit" value="Ajouter un producteur" />
+                    </form>
+                </h3>
+            </div>    
+            <div class="row justify-content-center">
                 <h1 class="text-center text-primary p-4">Liste des producteurs</h1>
             </div>
             <div class="row justify-content-center">
                 <div class="col-8 p-4 m-0 ">
                     <div class="table-responsive">
+                        
                         <table class="table table-hover" style="border:1px solid black;">
                             <thead class="text-primary">
                                 <tr>
@@ -20,6 +28,12 @@
                                     </th>
                                     <th scope="col">
                                         Téléphone
+                                    </th>
+                                    <th scope="col">
+                                        Modifier
+                                    </th>
+                                    <th scope="col">
+                                        Supprimer
                                     </th>
                                    
                                 </tr>
@@ -37,14 +51,20 @@
                                         <td>
                                             {{producteur.telephone |capitalize }}
                                         </td>
-                                        
                                         <td>
-										<a href="{{path('liste_producteurs',{'supp':producteur.id})}}" class="text-white">
-											<span class="material-icons" title="Supprimer le producteur'">
+										<a href="{{path('modif_producteur',{'id': producteur.id})}}" class="text-black">
+											<span class="material-icons" title="Modifier un	Producteur">
+												create
+											</span>
+										</a>
+									    </td>
+                                        <td>
+										<a href="{{path('liste_producteurs',{'supp':producteur.id})}}" class="text-black">
+											<span class="material-icons" title="Supprimer le Producteur'">
 												delete
 											</span>
 										</a>
-									</td>
+									    </td>
 
                                     </tr>
                                 {% endfor %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{parent()}} - Modifier une variété{% endblock %}
+{% block stylesheets %}
+			<link href="../css/styles.css" rel="stylesheet" />
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+{% endblock %}
+
+
+
+{% block content %}
+  {{ form_start(form) }}
+                
+                    {{ form_label(form.nom, 'Le nom : ', {'label_attr': {'class': 'font-weightbold'}}
+					) }}
+					{{ form_widget(form.nom, {'attr': {'class': 'form-control'}}
+					) }}
+                
+                
+                    {{ form_label(form.idCalibre, 'Le calibre : ', {'label_attr': {'class': 'font-weightbold'}}) }}
+                    {{ form_widget(form.idCalibre, {'attr': {'class': 'form-control'}}) }}
+                
+                
+                
+                
+                
+                    {{ form_widget(form.modifierVariete, { 'label': "Modifier une variété", 'attr': {'class': 'btn font-weightbold bg-primary text-white mx-auto text-center'}}) }}
+                
+                {{ form_end(form) }}
+
+{% endblock %}
+
+
+ {% block javascripts %}
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+ {% endblock %}

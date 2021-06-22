@@ -6,6 +6,28 @@
             <div class="row justify-content-center">
                 <h1 class="text-center text-primary p-4">Liste des variétés</h1>
             </div>
+
+
+            {{ form_start(form) }}
+                
+                    {{ form_label(form.nom, 'Le nom : ', {'label_attr': {'class': 'font-weightbold'}}
+					) }}
+					{{ form_widget(form.nom, {'attr': {'class': 'form-control'}}
+					) }}
+                
+                
+                    {{ form_label(form.idCalibre, 'Le calibre : ', {'label_attr': {'class': 'font-weightbold'}}) }}
+                    {{ form_widget(form.idCalibre, {'attr': {'class': 'form-control'}}) }}
+                
+                
+                
+                
+                
+                    {{ form_widget(form.ajouterVariete, { 'label': "Ajouter une variété", 'attr': {'class': 'btn font-weightbold bg-primary text-white mx-auto text-center'}}) }}
+                
+                {{ form_end(form) }}
+
+
             <div class="row justify-content-center">
                 <div class="col-8 p-4 m-0 ">
                     <div class="table-responsive">

@@ -10,7 +10,7 @@
             <div class="row justify-content-center">
                 <h3 class="text-center text-primary p-4">
                     <form action="{{ path('ajout_variete')}}">
-                        <input class="btn btn-success" type="submit" value="Ajouter un producteur" />
+                        <input class="btn btn-success" type="submit" value="Ajouter une variété" />
                     </form>
                     
             </h3>
@@ -32,11 +32,11 @@
                                     <th scope="col">
                                         Nom
                                     </th>
-                                     <th scope="col">
-                                     
+                                    <th scope="col">
+                                        Modifier
                                     </th>
                                     <th scope="col">
-                                     
+                                        Supprimer
                                     </th>
                                 </tr>
                             </thead>
@@ -48,21 +48,21 @@
                                             {{variete.nom |capitalize }}
                                         </td>
                 
-                                        
                                         <td>
-										<a href="{{path('liste_varietes',{'supp':variete.id})}}" class="text-black">
-											<span class="material-icons" title="Supprimer la variété">
-												delete
-											</span>
-										</a>
-									</td>
-                                         <td>
 										<a href="{{path('modif_variete',{'id': variete.id})}}" class="text-black">
 											<span class="material-icons" title="Modifier une Variété">
 												create
 											</span>
 										</a>
 									    </td>
+                                        <td>
+										<a href="{{path('liste_varietes',{'supp':variete.id})}}" class="text-black">
+											<span class="material-icons" title="Supprimer la variété">
+												delete
+											</span>
+										</a>
+									    </td>
+                                        
                                         
                                     </tr>
                                 {% endfor %}

@@ -5,8 +5,8 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
-
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\VarDumper\VarDumper;
 
 class DefaultController extends AbstractController
 {
@@ -23,10 +23,29 @@ class DefaultController extends AbstractController
    /**
      * @Route("/test", name="test")
      */
-    public function test(): Response
+    public function test( Request $request): Response
     {
+      
+        if ($request->isXmlHttpRequest())
+      {
+         $data    = $_POST["result"];
+         $data    = json_decode("$data", true);
+         $chaineFinale = "";
+         for ($i = 0; $i <= count($data)-1; $i++) {
+            for ($a = 0; $a <  count($data[0]); $a++) {
+                $chaineFinale = $chaineFinale . $data[$i][$a] . ";";
+               
+        }
+         $chaineFinale = $chaineFinale . "\n";
+         
+         
+      }
+      file_put_contents('/var/www/html/symfony4-4066/public/PoinPatate/templates/frigos/demo.csv', $chaineFinale);
+    
+    } 
         return $this->render('frigos/test.html.twig', [
             'controller_name' => 'DefaultController',
         ]);
-    }
+    
+}
 }

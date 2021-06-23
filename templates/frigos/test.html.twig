@@ -42,9 +42,7 @@
             datatables_options: {
                 paging: false
             },
-            custom_formatting: [
-                [4, format_link]
-            ]
+           
         });
 
 
@@ -62,7 +60,18 @@
         }
            tableauResult.push(monTableau)
         }
-        console.log(tableauResult);}
+        console.log(tableauResult);
+        //$.post( "{{ path('test') }}", { name: "John", time: "2pm" } );
+        $.ajax({
+            type    : 'POST',
+            url     : "{{ path('test') }}",
+            traditional: true,
+            data    : {result:JSON.stringify(tableauResult)},
+            success : function(response) {
+            alert(response);
+    }        
+        });}
+        
     </script>
 	{% endblock %}
 {% endblock %}

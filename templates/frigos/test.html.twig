@@ -15,6 +15,20 @@
                 <h1 class="text-center" >Frigo 3</h1>
 
                 <div id="table-container"></div>
+                <table id="gugu">
+    <thead>
+        <tr>
+            <th colspan="2">The table header</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td value="test">test</td>
+            <td>test2</td>
+        </tr>
+    </tbody>
+</table>
+
             </div>
         </main>
         <footer class="row">
@@ -129,6 +143,28 @@ function variete(id){
             
     }        
         });}
+
+
+
+        
+    </script>
+    
+    <script type="text/javascript">
+        (function color() {
+            let result;
+            var table = document.getElementbyId("gugu");
+                if (table.html = 'test'){
+                    table.addClass('bg-primary')
+                    result = 'ok';
+
+                }
+                else
+                {
+                    result = 'pas ok';
+                }
+                return result
+        console.log(color());
+        });
         
        
       function toggle(classItem){

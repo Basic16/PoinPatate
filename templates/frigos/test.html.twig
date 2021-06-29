@@ -3,7 +3,7 @@
 {% block title %}{{parent()}} - Calibres{% endblock %}
 
 {% block stylesheets %}
-          
+       {{parent()}}   
         {% endblock %}
 
 
@@ -24,14 +24,50 @@
             <button onclick="recupDonnees()">test</button>
         </footer>
     </div>
-   
+
+    
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form name="changeVariete" >
+        <select name="selectionVariete" id="selectionVariete" class="form-select">
+        <script>var couleurVarietes = {};</script>
+        {% for variete in varietes %}
+        <script> couleurVarietes["{{variete.nom}}"]= '{{variete.couleur}}' </script>
+          <option value="{{variete.nom}}">{{variete.nom}}</option>
+          {% endfor %}
+        </select>
+      </form>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-primary" onclick="changementVariete(document.getElementById('selectionVariete').value)" data-dismiss="modal">Confirmer les changements</button>
+      </div>
+    </div>
+  </div>
+</div>
+        
+   {% endblock %}
    
     {% block javascripts %}
     
 	{{parent()}}
-    
     <script>
-   
+    
+
+var celluleAChanger = "";
+
+
         function format_link(link) {
             if (link)
                 return "<a href='" + link + "' target='_blank'>" + link + "</a>";
@@ -51,8 +87,23 @@
             },
            
         });
+  
+      
+   
 
-
+function changementVariete(nouvelleValeur){
+        document.getElementById(celluleAChanger).innerHTML = nouvelleValeur;
+        document.getElementById(celluleAChanger).style.background = couleurVarietes[nouvelleValeur];
+        
+}
+function variete(id){
+      
+         
+        celluleAChanger= id;
+        console.log(celluleAChanger);
+        }
+        
+    
         function recupDonnees() {
             
             var tableauResult = [];
@@ -90,6 +141,22 @@
             document.getElementsByClassName(classItem)[i].style.display='none';
         }
 }}
+    
+
+
+
+
+
+
+
+$('#myModal').on('shown.bs.modal', function () {
+  $('#myInput').trigger('focus')
+})
+
+
     </script>
+
+
+
+
 	{% endblock %}
-{% endblock %}

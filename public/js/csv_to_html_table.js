@@ -81,7 +81,7 @@ CsvToHtmlTable = {
                             var $tableBodyRowTd = $("<td contenteditable='true'" + "value='" + csvData[rowIdx][colIdx] + "' style='background-color:"+ couleur +"; display: none;' class='"+ entetes[Math.floor(colIdx/3)*3] +"'></td>");
                           }                                                                                                                                                    
                           else{
-                            var $tableBodyRowTd = $("<td contenteditable='true'" + "value='" + csvData[rowIdx][colIdx] + "' style='background-color:"+ couleur +"' class=''></td>");
+                            var $tableBodyRowTd = $("<td data-toggle='modal' data-target='#exampleModalCenter' onClick=variete('"+ rowIdx + '-' + colIdx+"')  id='"+ rowIdx + '-' + colIdx +"'" + "value='" + csvData[rowIdx][colIdx] + "' style='background-color:"+ couleur +"' class=''></td>");
                           }
                         
                         var cellTemplateFunc = customTemplates[colIdx];

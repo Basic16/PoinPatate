@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\VarDumper\VarDumper;
-
+use App\Entity\Calibre;
 class DefaultController extends AbstractController
 {
     /**
@@ -25,9 +25,12 @@ class DefaultController extends AbstractController
      */
     public function test( Request $request): Response
     {
-      
+        $em = $this->getDoctrine();
+        $repoCalibre = $em->getRepository(Calibre::class);
+        $calibres = $repoCalibre->findBy(array(), array('calibre' => 'ASC'));
         if ($request->isXmlHttpRequest())
       {
+          
          $data    = $_POST["result"];
          $data    = json_decode("$data", true);
          $chaineFinale = "";
@@ -40,11 +43,12 @@ class DefaultController extends AbstractController
          
          
       }
-      file_put_contents('/var/www/html/symfony4-4066/public/PoinPatate/templates/frigos/demo.csv', $chaineFinale);
+      file_put_contents('../public/csv/demo.csv', $chaineFinale);
     
     } 
         return $this->render('frigos/test.html.twig', [
             'controller_name' => 'DefaultController',
+            'calibres' => $calibres
         ]);
     
 }

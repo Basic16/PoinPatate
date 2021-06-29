@@ -2,6 +2,9 @@
 
 {% block title %}{{parent()}} - Calibres{% endblock %}
 
+{% block stylesheets %}
+          
+        {% endblock %}
 
 
 
@@ -21,18 +24,22 @@
             <button onclick="recupDonnees()">test</button>
         </footer>
     </div>
-
+   
+   
     {% block javascripts %}
+    
 	{{parent()}}
+    
     <script>
+   
         function format_link(link) {
             if (link)
                 return "<a href='" + link + "' target='_blank'>" + link + "</a>";
             else return "";
         }
-
+        
         CsvToHtmlTable.init({
-            csv_path: "csv/Frigo3v2.csv",
+            csv_path: "csv/demo.csv",
             element: "table-container",
             allow_download: false,
             csv_options: {
@@ -61,17 +68,28 @@
            tableauResult.push(monTableau)
         }
         console.log(tableauResult);
-        //$.post( "{{ path('test') }}", { name: "John", time: "2pm" } );
+        //{{app.request.get('id')}}
         $.ajax({
             type    : 'POST',
             url     : "{{ path('test') }}",
             traditional: true,
             data    : {result:JSON.stringify(tableauResult)},
             success : function(response) {
-            alert(response);
+            
     }        
         });}
         
+       
+      function toggle(classItem){
+    for(i = 0 ; i <document.getElementsByClassName(classItem).length ; i++)
+    {
+        if(document.getElementsByClassName(classItem)[i].style.display=='none'){
+            document.getElementsByClassName(classItem)[i].style.display='';
+        }
+        else{
+            document.getElementsByClassName(classItem)[i].style.display='none';
+        }
+}}
     </script>
 	{% endblock %}
 {% endblock %}

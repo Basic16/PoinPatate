@@ -1,4 +1,32 @@
+
+    var varietes = [];
+    var couleurs =[];
+    var entetes =[];
+    var couleur = "";
+    var request= $.ajax({
+    url: "http://serveur1.arras-sio.com/symfony4-4066/PoinPatate/public/api/varietes",
+    method: "GET",
+    dataType: "json",
+    beforeSend: function( xhr ) {
+       xhr.overrideMimeType( "application/json; charset=utf-8" );
+    }});
+    request.done(function( msg ) {
+       $.each(msg, function(index,e){
+       varietes.push(e.nom) ;
+       couleurs.push(e.couleur) ;
+       });
+    });
+    // Fonction qui se lance lorsque l’accès au web service provoque une erreur
+    request.fail(function( jqXHR, textStatus ) {
+    alert ('erreur');
+    });
+
+
+
+
+
 var CsvToHtmlTable = CsvToHtmlTable || {};
+
 
 CsvToHtmlTable = {
     init: function (options) {
@@ -27,7 +55,10 @@ CsvToHtmlTable = {
                 var csvHeaderRow = csvData[0];
                 var $tableHeadRow = $("<tr></tr>");
                 for (var headerIdx = 0; headerIdx < csvHeaderRow.length; headerIdx++) {
-                    $tableHeadRow.append($("<th></th>").text(csvHeaderRow[headerIdx]));
+                    entetes.push(csvHeaderRow[headerIdx].replace(/ /g,""));
+                    if((headerIdx % 3) != 0){
+                    $tableHeadRow.append($("<th  class='"+ entetes[Math.floor(headerIdx/3)*3] +"' style=' display: none;'></th>").text(csvHeaderRow[headerIdx]));}
+                    else{$tableHeadRow.append($("<th onClick=toggle('"+ entetes[headerIdx]+"')></th>").text(csvHeaderRow[headerIdx]));}
                 }
                 $tableHead.append($tableHeadRow);
 
@@ -37,12 +68,29 @@ CsvToHtmlTable = {
                 for (var rowIdx = 1; rowIdx < csvData.length; rowIdx++) {
                     var $tableBodyRow = $("<tr></tr>");
                     for (var colIdx = 0; colIdx < csvData[rowIdx].length; colIdx++) {
-                        var $tableBodyRowTd = $("<td contenteditable='true'" + "value='" + csvData[rowIdx][colIdx] + "'></td>");
+                        for (var i = 0; i < varietes.length; i++) {
+                            
+                            if(csvData[rowIdx][colIdx] ==  varietes[i]){
+                                 couleur = couleurs[i];
+                                 break;
+                           }
+                           else{
+                                couleur = "";}
+                          }
+                          if(colIdx%3 != 0){
+                            var $tableBodyRowTd = $("<td contenteditable='true'" + "value='" + csvData[rowIdx][colIdx] + "' style='background-color:"+ couleur +"; display: none;' class='"+ entetes[Math.floor(colIdx/3)*3] +"'></td>");
+                          }                                                                                                                                                    
+                          else{
+                            var $tableBodyRowTd = $("<td contenteditable='true'" + "value='" + csvData[rowIdx][colIdx] + "' style='background-color:"+ couleur +"' class=''></td>");
+                          }
+                        
                         var cellTemplateFunc = customTemplates[colIdx];
                         if (cellTemplateFunc) {
                             $tableBodyRowTd.html(cellTemplateFunc(csvData[rowIdx][colIdx]));
+                            
                         } else {
                             $tableBodyRowTd.text(csvData[rowIdx][colIdx]);
+                            
                         }
                         $tableBodyRow.append($tableBodyRowTd);
                         $tableBody.append($tableBodyRow);

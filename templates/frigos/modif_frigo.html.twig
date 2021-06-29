@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{parent()}} - Modifier un frigo{% endblock %}
+{% block stylesheets %}
+            {{parent()}}
+			<link href="../css/styles.css" rel="stylesheet" />
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+{% endblock %}
+
+
+
+{% block content %}
+<div class="container-fluid">
+		<div class="row justify-content-center">
+			<h1 class="text-center text-primary p-4">
+				Modifier un frigo
+			</h1>
+		</div>
+		<div class="row justify-content-center">
+			<div class="col-8 p-4 m-0 text-primary">
+            {{ form_start(form) }}
+                <div class="form-group mx-auto text-center w-25 p-3">
+                
+                    {{ form_label(form.nom, 'Le nom : ', {'label_attr': {'class': 'font-weightbold'}}
+					) }}
+					{{ form_widget(form.nom, {'attr': {'class': 'form-control'}}
+					) }}
+                    {{ form_label(form.CSV, 'Le CSV : ', {'label_attr': {'class': 'font-weightbold'}}
+					) }}
+					{{ form_widget(form.CSV, {'attr': {'class': 'form-control'}}
+					) }}
+                    {{ form_label(form.Stockage, 'Le stockage max : ', {'label_attr': {'class': 'font-weightbold'}}
+					) }}
+					{{ form_widget(form.Stockage, {'attr': {'class': 'form-control'}}
+					) }}
+                    
+                    </div>
+                    <div class="form-group mx-auto text-center w-25 p-3">
+                
+                    {{ form_widget(form.modif_frigo, { 'label': "Modifier un frigo", 'attr': {'class': 'btn font-weightbold bg-primary text-white mx-auto text-center'}}) }}
+                    </div>
+                
+            {{ form_end(form) }}
+    		</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+
+ {% block javascripts %}
+ {{parent()}}
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+ {% endblock %}

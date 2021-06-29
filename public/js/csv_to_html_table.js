@@ -37,7 +37,7 @@ CsvToHtmlTable = {
                 for (var rowIdx = 1; rowIdx < csvData.length; rowIdx++) {
                     var $tableBodyRow = $("<tr></tr>");
                     for (var colIdx = 0; colIdx < csvData[rowIdx].length; colIdx++) {
-                        var $tableBodyRowTd = $("<td contenteditable='true'" + "value='" + csvData[rowIdx][colIdx] + "'></td>");
+                        var $tableBodyRowTd = $("<td class='' contenteditable='true'" + "value='" + csvData[rowIdx][colIdx] + "'></td>");
                         var cellTemplateFunc = customTemplates[colIdx];
                         if (cellTemplateFunc) {
                             $tableBodyRowTd.html(cellTemplateFunc(csvData[rowIdx][colIdx]));

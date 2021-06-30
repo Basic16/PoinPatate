@@ -19,62 +19,55 @@
 	<div class="row justify-content-center">
 		<div class="col-8 p-4 m-0 text-primary">
             
-            <div class="form-group mx-auto text-center w-25 p-3">
+           
                 
-                <table class="table table-hover" id="tablecsv">
-                    <thead>
-                        <tr>
-                            <td>
-                                Test1
-                            </td>
-                            <td>
-                                Test2
-                            </td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>
-
-                        </td>
-                        <td>
-                        
-                        </td>
-
-
-                    </tr>
-                    </tbody>
-                </table>
+               <div id="TBL"></div>
                 
-            </div>
+           
         </div>
 	</div>
 </div>
+Nombre de colonnes a ajouter :
+<input type="number" min="1" id="nombreColonne" value="" required="required">
 Nombre de lignes a ajouter :
-<input type="number" min="1" id="table-row-num" value="" required="required">
-<button type="button" class="btn btn-primary" onclick="ligne()">Ajouter </button>
+<input type="number" min="1" id="nombreLigne" value="" required="required">
+<button type="button" class="btn btn-primary" onclick="createFrigo()">Créer </button>
 
 {% endblock %}
       
 {% block javascripts %}
 {{parent()}}
     <script>
-        function ligne() {
-            var table = $("#tablecsv");
-            var rowNum = getElementById("myTable").rows.length;
-            var resultHtml = '';
-    
-            for(var i = 0 ; i < rowNum ; i++) {
-                resultHtml += ["<tr>", 
-            "<td>", 
-            "</td>",
-            '<td></td>',
-            '<td></td>',
-            '</tr>'].join("\n");
-            }  
+    var nombreColonne = 0;
+     var nombreLigne = 0;
+        function createFrigo(){
+        nombreColonne = document.getElementById('nombreColonne').value;
+        nombreLigne = document.getElementById('nombreLigne').value;
+        console.log(nombreLigne);
+        console.log(nombreColonne);
+        var body = document.getElementById("TBL");
+        var table= document.createElement('TABLE');
+        table.setAttribute("class", "table table-hover");
+        var tblB = document.createElement('TBODY');
+        table.appendChild(tblB);
+        for (var i=0; i<nombreLigne; i++){
+            var tr = document.createElement('TR');
+             if( i == nombreColonne-1){
+                     tr.innerHTML =  "C"+i;
+                }
             
-            table.html(resultHtml);
-            return false; 
-        };
+            tblB.appendChild(tr);
+
+            for (var j=0; j< nombreColonne; j++){
+                var td = document.createElement('TD');
+              
+                
+                tr.appendChild(td);
+
+            }
+           
+        }
+        console.log(table);
+        body.appendChild(table);}
     </script>
 {% endblock %}

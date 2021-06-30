@@ -36,15 +36,20 @@ class DefaultController extends AbstractController
          $chaineFinale = "";
          for ($i = 0; $i <= count($data)-1; $i++) {
             for ($a = 0; $a <  count($data[0]); $a++) {
-                $chaineFinale = $chaineFinale . $data[$i][$a] . ";";
+                if($a != count($data[0])-1){
+                $chaineFinale = $chaineFinale . $data[$i][$a] . ";";}
+                else{
+                    $chaineFinale = $chaineFinale . $data[$i][$a] . "";
+                }
                
         }
          $chaineFinale = $chaineFinale . "\n";
          
          
       }
+      
       file_put_contents('../public/csv/demo.csv', $chaineFinale);
-    
+      
     } 
         return $this->render('frigos/test.html.twig', [
             'controller_name' => 'DefaultController',

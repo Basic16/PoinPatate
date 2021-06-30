@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{parent()}} - Calibres{% endblock %}
+{% block title %}{{parent()}} - Frigos{% endblock %}
 
 {% block stylesheets %}
        {{parent()}}   
@@ -15,19 +15,7 @@
                 <h1 class="text-center" >Frigo 3</h1>
 
                 <div id="table-container"></div>
-                <table id="gugu">
-    <thead>
-        <tr>
-            <th colspan="2">The table header</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td value="test">test</td>
-            <td>test2</td>
-        </tr>
-    </tbody>
-</table>
+                
 
             </div>
         </main>
@@ -35,7 +23,8 @@
             <div class="col">
                 <hr>
             </div>
-            <button onclick="recupDonnees()">test</button>
+            <button onclick="recupDonnees()">Valider les modification</button>
+            <button onclick="viderCsv()">Vider et valider les changement</button>
         </footer>
     </div>
 
@@ -80,8 +69,10 @@
     
 
 var celluleAChanger = "";
+var tailleTableau = 0; 
 
-
+   
+ 
         function format_link(link) {
             if (link)
                 return "<a href='" + link + "' target='_blank'>" + link + "</a>";
@@ -102,8 +93,8 @@ var celluleAChanger = "";
            
         });
   
-      
-   
+    
+
 
 function changementVariete(nouvelleValeur){
         document.getElementById(celluleAChanger).innerHTML = nouvelleValeur;
@@ -121,11 +112,12 @@ function variete(id){
         function recupDonnees() {
             
             var tableauResult = [];
-            
-            for (let i = 0; i <= 19; i++) {
+            console.log($("table > tbody > tr").length);
+            console.log($("table > tbody > tr:first > td").length);
+            for (let i = 0; i <= $("table > tbody > tr").length; i++) {
                  var monTableau = [];
                 
-                 for (let a = 0; a < 9; a++) {
+                 for (let a = 0; a < $("table > tbody > tr:first > td").length; a++) {
                 
                     monTableau.push(document.getElementsByTagName('table')[0].getElementsByTagName('tr')[i].cells[a].innerHTML) ;
 
@@ -140,32 +132,51 @@ function variete(id){
             traditional: true,
             data    : {result:JSON.stringify(tableauResult)},
             success : function(response) {
+              
+    }        
+        });
+        
+         }
+    function viderCsv() {
+            
+            var tableauResult = [];
+              console.log($("table > tbody > tr").length);
+              console.log($("table > tbody > tr:first > td").length);
+            for (let i = 0; i < $("table > tbody > tr").length; i++) {
+                 var monTableau = [];
+                
+                 for (let a = 0; a < $("table > tbody > tr:first > td").length; a++) {
+                    if(i == 0){
+                         monTableau.push(document.getElementsByTagName('table')[0].getElementsByTagName('tr')[i].cells[a].innerHTML) ;
+                    }else{
+                     monTableau.push("") ;
+
+                    }
+                   
+        console.log(monTableau);
+        }
+           tableauResult.push(monTableau)
+        }
+        console.log(tableauResult);
+        //{{app.request.get('id')}}
+        $.ajax({
+            type    : 'POST',
+            url     : "{{ path('test') }}",
+            traditional: true,
+            data    : {result:JSON.stringify(tableauResult)},
+            success : function(response) {
             
     }        
-        });}
-
+        });
+      
+        }
 
 
         
     </script>
     
     <script type="text/javascript">
-        (function color() {
-            let result;
-            var table = document.getElementbyId("gugu");
-                if (table.html = 'test'){
-                    table.addClass('bg-primary')
-                    result = 'ok';
-
-                }
-                else
-                {
-                    result = 'pas ok';
-                }
-                return result
-        console.log(color());
-        });
-        
+     
        
       function toggle(classItem){
     for(i = 0 ; i <document.getElementsByClassName(classItem).length ; i++)
@@ -176,7 +187,10 @@ function variete(id){
         else{
             document.getElementsByClassName(classItem)[i].style.display='none';
         }
-}}
+}
+
+
+}
     
 
 
@@ -188,7 +202,6 @@ function variete(id){
 $('#myModal').on('shown.bs.modal', function () {
   $('#myInput').trigger('focus')
 })
-
 
     </script>
 

@@ -1,14 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{{parent()}} - Accueil{% endblock %}
-{% block body %}
 
-{{parent()}}
+
 
 
 {% block content %}
 
+<ul class="list-group">
+  <li class="list-group-item"> <a class="" href="{{ path('liste_frigos') }}">Frigos</a></li>
+  <li class="list-group-item"><a class="" href="{{ path('liste_varietes') }}">Variétés</a></li>
+  <li class="list-group-item"><a class="" href="{{ path('liste_producteurs') }}">Producteurs</a></li>
+  <li class="list-group-item"><a class="" href="{{ path('calibre') }}">Calibres</a></li>
+</ul>
+
 {% endblock %}
       
 
-{% endblock %}

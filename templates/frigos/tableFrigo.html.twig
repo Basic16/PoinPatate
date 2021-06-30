@@ -145,12 +145,12 @@ function variete(id){
             traditional: true,
             data    : {result:JSON.stringify(tableauResult)},
             success : function(response) {
-             
+            
               
     }        
         });
         
-          document.location.reload();}
+         document.location.href='{{ path('liste_frigos') }}';}
     function viderCsv() {
             
             var tableauResult = [];
@@ -178,11 +178,11 @@ function variete(id){
             traditional: true,
             data    : {result:JSON.stringify(tableauResult)},
             success : function(response) {
-          
+            document.location.href='{{ path('liste_frigos') }}';
     }        
         });
       
-         document.location.reload();}
+        document.location.href='{{ path('liste_frigos') }}'}
 
 
         

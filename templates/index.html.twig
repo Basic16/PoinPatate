@@ -7,13 +7,20 @@
 
 {% block content %}
 
-<ul class="list-group">
-  <li class="list-group-item"> <a class="" href="{{ path('liste_frigos') }}">Frigos</a></li>
-  <li class="list-group-item"><a class="" href="{{ path('liste_varietes') }}">Variétés</a></li>
-  <li class="list-group-item"><a class="" href="{{ path('liste_producteurs') }}">Producteurs</a></li>
-  <li class="list-group-item"><a class="" href="{{ path('calibre') }}">Calibres</a></li>
-</ul>
-
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-4 p-4 m-0 ">
+            <div class="list-group text-center align-self-end">
+                <strong >
+                    <a href="{{ path('liste_frigos') }}" class="list-group-item list-group-item-action ">Frigos</a>
+                    <a href="{{ path('liste_varietes') }}" class="list-group-item list-group-item-action">Variétés</a>
+                    <a href="{{ path('liste_producteurs') }}" class="list-group-item list-group-item-action">Producteurs</a>
+                    <a href="{{ path('calibre') }}" class="list-group-item list-group-item-action" tabindex="-1" aria-disabled="true">Calibres</a>
+                </strong>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
       
 

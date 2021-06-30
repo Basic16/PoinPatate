@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Frigos;
+use App\Entity\Variete;
 use App\Form\AjoutFrigosType;
 use App\Form\ModifFrigoType;
 
@@ -14,12 +15,43 @@ use App\Form\ModifFrigoType;
 class FrigosController extends AbstractController
 {
     /**
-     * @Route("/tableFrigo", name="tableFrigo")
+     * @Route("/tableFrigo/{id}", name="tableFrigo", requirements={"id"="\d+"})
      */
-    public function index(): Response
+    public function tableFrigo(int $id, Request $request): Response
     {
-        return $this->render('frigos/csvMaker.html.twig', [
+        
+        $em = $this->getDoctrine();
+        $repoVariete = $em->getRepository(Variete::class);
+        $repoFrigo = $em->getRepository(Frigos::class);
+        $frigo = $repoFrigo->findOneby(array('id'=>$id));
+        $varietes = $repoVariete->findBy(array(), array('nom' => 'ASC'));
+        if ($request->isXmlHttpRequest())
+      {
+         $nom = $frigo->getNom();
+         $data    = $_POST["result"];
+         $data    = json_decode("$data", true);
+         $chaineFinale = "";
+         for ($i = 0; $i <= count($data)-1; $i++) {
+            for ($a = 0; $a <  count($data[0]); $a++) {
+                if($a != count($data[0])-1){
+                $chaineFinale = $chaineFinale . $data[$i][$a] . ";";}
+                else{
+                    $chaineFinale = $chaineFinale . $data[$i][$a] . "";
+                }
+               
+        }
+         $chaineFinale = $chaineFinale . "\n";
+         
+         
+      }
+      
+      file_put_contents('../public/csv/'.$nom.'.csv', $chaineFinale);
+      
+    } 
+        return $this->render('frigos/tableFrigo.html.twig', [
             'controller_name' => 'FrigosController',
+            'varietes' => $varietes,
+            'frigo' => $frigo
         ]);
     }
 
@@ -103,26 +135,53 @@ class FrigosController extends AbstractController
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
-                $file = $form->get('CSV')->getData();
+                
                 $nom = $form->get('nom')->getData();
-                $fileName = $nom . '.' . $file->guessExtension();
-
+                $largeur = $form->get('Largeur')->getData();
+                $longueur = $form->get('Longueur')->getData();
+                $frigo->setCSV($nom.'.csv');
                 $em = $this->getDoctrine()->getManager();
-                try {
-                    $file->move($this->getParameter('csv_directory'), $fileName);
-                    $em = $this->getDoctrine()->getManager();
-                    $frigo->setCSV($fileName);
-                    $em->persist($frigo);
-                    $em->flush();
-                } catch (FileException $e) {
-                    $this->addFlash('notice', 'Problème de CSV inséré');
-                }
+                
+                $em->persist($frigo);
+                $em->flush();
+              
+                $chaineFinale = "";
+                for($j = 1; $j <= $largeur; $j++){
+                    if($j != $largeur){
+                    $chaineFinale =  $chaineFinale . "C" . $j . " variete" . ";";
+                    $chaineFinale =  $chaineFinale . "C" . $j . " producteur" . ";";
+                    $chaineFinale =  $chaineFinale . "C" . $j . " calibre" . ";";
+                    $chaineFinale =  $chaineFinale . "C" . $j . " qte" . ";";}
+                    else{
+                        $chaineFinale =  $chaineFinale . "C" . $j . " variete". ";" ;
+                        $chaineFinale =  $chaineFinale . "C" . $j . " producteur". ";" ;
+                        $chaineFinale =  $chaineFinale . "C" . $j . " calibre". ";";
+                        $chaineFinale =  $chaineFinale . "C" . $j . " qte" ;}
+                    }
+               
+                $chaineFinale = $chaineFinale . "\n";
 
+                for ($i = 0; $i <= ($longueur)-1; $i++) {
+                   for ($a = 0; $a <  ($largeur*4); $a++) {
+                       if($a != ($largeur*4)-1){
+                       $chaineFinale = $chaineFinale . "vide" . ";";}
+                       else{
+                           $chaineFinale = $chaineFinale . "vide" . "";
+                       }
+                      
+               }
+                $chaineFinale = $chaineFinale . "\n";
+                
+                
+             }
+             file_put_contents('../public/csv/'. $nom .'.csv', $chaineFinale);
+             
                 $this->addFlash('notice', 'Frigo ajouté');
-            }
+                return $this->redirectToRoute('liste_frigos');
+            } }
 
-            return $this->redirectToRoute('liste_frigos');
-        }
+        
+        
         return $this->render('frigos/ajout_frigo.html.twig', [
             'form' => $form->createView()
         ]);

@@ -88,7 +88,7 @@ class VarieteController extends AbstractController
                 $this->addFlash('notice', 'Variété ajoutée'); 
 
             }
-            return $this->redirectToRoute('ajout_variete');
+            return $this->redirectToRoute('liste_varietes');
         }
         return $this->render('variete/ajout_variete.html.twig', [
             'form' => $form->createView() 

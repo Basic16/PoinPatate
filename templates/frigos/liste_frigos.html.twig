@@ -35,9 +35,7 @@
                                     <th scope="col">
                                         CSV
                                     </th>
-                                    <th scope="col">
-                                        Stockage
-                                    </th>
+                                   
                                     <th scope="col">
                                         Modifier
                                     </th>
@@ -58,9 +56,7 @@
                                         <td>
                                             {{frigo.CSV |capitalize }}
                                         </td>
-                                        <td>
-                                            {{frigo.Stockage |capitalize }}
-                                        </td>
+                                       
                                         <td>
 										<a href="{{path('modif_frigo',{'id': frigo.id})}}" class="text-black">
 											<span class="material-icons" title="Modifier une Variété">
@@ -69,7 +65,7 @@
 										</a>
 									    </td>
                                         <td>
-										<a href="{{path('liste_varietes',{'supp':frigo.id})}}" class="text-black">
+										<a href="{{path('liste_frigos',{'supp':frigo.id})}}" class="text-black">
 											<span class="material-icons" title="Supprimer la variété">
 												delete
 											</span>

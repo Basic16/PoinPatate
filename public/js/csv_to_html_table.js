@@ -56,8 +56,8 @@ CsvToHtmlTable = {
                 var $tableHeadRow = $("<tr></tr>");
                 for (var headerIdx = 0; headerIdx < csvHeaderRow.length; headerIdx++) {
                     entetes.push(csvHeaderRow[headerIdx].replace(/ /g,""));
-                    if((headerIdx % 3) != 0){
-                    $tableHeadRow.append($("<th  class='"+ entetes[Math.floor(headerIdx/3)*3] +"' style=' display: none;'></th>").text(csvHeaderRow[headerIdx]));}
+                    if((headerIdx % 4) != 0){
+                    $tableHeadRow.append($("<th  class='"+ entetes[Math.floor(headerIdx/4)*4] +"' style=' display: none;'></th>").text(csvHeaderRow[headerIdx]));}
                     else{$tableHeadRow.append($("<th onClick=toggle('"+ entetes[headerIdx]+"')></th>").text(csvHeaderRow[headerIdx]));}
                 }
                 $tableHead.append($tableHeadRow);
@@ -77,8 +77,8 @@ CsvToHtmlTable = {
                            else{
                                 couleur = "";}
                           }
-                          if(colIdx%3 != 0){
-                            var $tableBodyRowTd = $("<td contenteditable='true'" + "value='" + csvData[rowIdx][colIdx] + "' style='background-color:"+ couleur +"; display: none;' class='"+ entetes[Math.floor(colIdx/3)*3] +"'></td>");
+                          if(colIdx%4 != 0){
+                            var $tableBodyRowTd = $("<td contenteditable='true'" + "value='" + csvData[rowIdx][colIdx] + "' style='background-color:"+ couleur +"; display: none;' class='"+ entetes[Math.floor(colIdx/4)*4] +"'></td>");
                           }                                                                                                                                                    
                           else{
                             var $tableBodyRowTd = $("<td data-toggle='modal' data-target='#exampleModalCenter' onClick=variete('"+ rowIdx + '-' + colIdx+"')  id='"+ rowIdx + '-' + colIdx +"'" + "value='" + csvData[rowIdx][colIdx] + "' style='background-color:"+ couleur +"' class=''></td>");

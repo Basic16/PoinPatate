@@ -3,18 +3,19 @@
 {% block title %}{{parent()}} - Frigos{% endblock %}
 
 {% block stylesheets %}
-       {{parent()}}   
+       <link href="../css/styles.css" rel="stylesheet" />
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
         {% endblock %}
 
 
 
 {% block content %}
-    <div class="container-fluid">
+    <div class="container-fluid" >
         <main class="row">
             <div class="col">
                 <h1 class="text-center" >Frigo 3</h1>
 
-                <div id="table-container"></div>
+                <div id="table-container" style="overflow-x: scroll;"></div>
                 
 
             </div>
@@ -23,8 +24,9 @@
             <div class="col">
                 <hr>
             </div>
-            <button onclick="recupDonnees()">Valider les modification</button>
-            <button onclick="viderCsv()">Vider et valider les changement</button>
+            <button class="btn btn-primary" onclick="recupDonnees()">Valider les modification</button>
+            <hr>
+            <button class="btn btn-primary" onclick="viderCsv()">Vider et valider les changement</button>
         </footer>
     </div>
 
@@ -59,12 +61,23 @@
     </div>
   </div>
 </div>
-        
+       
    {% endblock %}
    
     {% block javascripts %}
-    
-	{{parent()}}
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+      <script src="../js/jquery.csv.min.js"></script>
+
+      <script src="../js/csv_to_html_table.js"></script>
+      <!-- Bootstrap core JS-->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+      <!-- Core theme JS-->
+      <script src="../js/scripts.js"></script>
+
     <script>
     
 
@@ -80,7 +93,7 @@ var tailleTableau = 0;
         }
         
         CsvToHtmlTable.init({
-            csv_path: "csv/demo.csv",
+            csv_path: "../csv/"+'{{frigo.CSV}}',
             element: "table-container",
             allow_download: false,
             csv_options: {
@@ -128,20 +141,20 @@ function variete(id){
         //{{app.request.get('id')}}
         $.ajax({
             type    : 'POST',
-            url     : "{{ path('test') }}",
+            url     : "{{ path('tableFrigo',{'id': frigo.id}) }}",
             traditional: true,
             data    : {result:JSON.stringify(tableauResult)},
             success : function(response) {
+             
               
     }        
         });
         
-         }
+          document.location.reload();}
     function viderCsv() {
             
             var tableauResult = [];
-              console.log($("table > tbody > tr").length);
-              console.log($("table > tbody > tr:first > td").length);
+             
             for (let i = 0; i < $("table > tbody > tr").length; i++) {
                  var monTableau = [];
                 
@@ -161,15 +174,15 @@ function variete(id){
         //{{app.request.get('id')}}
         $.ajax({
             type    : 'POST',
-            url     : "{{ path('test') }}",
+            url     : "{{ path('tableFrigo',{'id': frigo.id}) }}",
             traditional: true,
             data    : {result:JSON.stringify(tableauResult)},
             success : function(response) {
-            
+          
     }        
         });
       
-        }
+         document.location.reload();}
 
 
         

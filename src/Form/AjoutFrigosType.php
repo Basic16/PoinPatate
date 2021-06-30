@@ -17,10 +17,14 @@ class AjoutFrigosType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class)
-            ->add('CSV', FileType::class)
-            ->add('Stockage', NumberType::class)
-            /*->add('idVariete',NumberType::class)
-            ->add('idProducteurs',NumberType::class)*/
+          
+            ->add('Largeur', NumberType::class, array(
+                
+                'mapped' => false))
+                ->add('Longueur', NumberType::class, array(
+                
+                    'mapped' => false))
+        
             ->add('ajout_frigo', SubmitType::class)
         ;   
     }

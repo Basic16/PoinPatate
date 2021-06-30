@@ -32,11 +32,6 @@ class Frigos
     private $CSV;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $Stockage;
-
-    /**
      * @ORM\ManyToMany(targetEntity=Variete::class, inversedBy="frigos")
      */
     private $idVariete;
@@ -81,17 +76,6 @@ class Frigos
         return $this;
     }
 
-    public function getStockage(): ?int
-    {
-        return $this->Stockage;
-    }
-
-    public function setStockage(int $Stockage): self
-    {
-        $this->Stockage = $Stockage;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Variete[]

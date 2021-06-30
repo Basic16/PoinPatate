@@ -1,20 +1,6 @@
-C1 Variete;C1 Producteur;C1 Calibre;C2 Variete;C2 Producteur;C2 Calibre;C3 Variete;C3 Producteur;C3 Calibre
-Manitou;Bihucourt;40/75;Manitou;Bihucourt;40/75;Test;Denis;40/76
-Manitou;Bihucourt;40/75;Manitou;Bihucourt;40/75;Manitou;Denis;40/75
-Manitou;Bihucourt;40/75;Manitou;Bihucourt;40/75;Manitou;Denis;40/75
-Manitou;Bihucourt;40/75;Manitou;Bihucourt;40/75;Manitou;Denis;40/75
-Manitou;Bihucourt;40/75;Manitou;Bihucourt;40/75;Manitou;Denis;40/75
-Manitou;Bihucourt;40/75;Manitou;Bihucourt;40/75;Manitou;Denis;40/75
-Manitou;Bihucourt;40/75;Manitou;Bihucourt;40/75;Manitou;Denis;40/75
-Manitou;Bihucourt;40/75;Manitou;Bihucourt;40/75;Manitou;Denis;40/75
-Manitou;Bihucourt;40/75;Manitou;Bihucourt;40/75;Manitou;Denis;40/75
-Manitou;Bihucourt;40/75;Amandinette;Bihucourt;40/75;Manitou;Denis;40/75
-Amandinette;Bihucourt;40/75;Amandinette;Bihucourt;40/75;Manitou;Denis;40/75
-Manitou;Bihucourt;40/75;Didier;Bihucourt;40/75;Manitou;Bihucourt;40/75
-Manitou;Bihucourt;40/75;Adrien;Bihucourt;40/75;Manitou;Bihucourt;40/75
-Manitou;Bihucourt;40/75;Test;Bihucourt;40/75;Manitou;Bihucourt;40/75
-Manitou;Bihucourt;40/75;Manitou;Bihucourt;40/75;Manitou;Bihucourt;40/75
-Manitou;Bihucourt;40/75;Manitou;Bihucourt;40/75;Manitou;Bihucourt;40/75
-Manitou;Bihucourt;40/75;Manitou;Bihucourt;40/75;Manitou;Bihucourt;40/75
-Manitou;Bihucourt;40/75;Manitou;Bihucourt;40/75;Manitou;Bihucourt;40/75
-Manitou;Bihucourt;40/75;Manitou;Bihucourt;40/75;Manitou;Bihucourt;40/75
+C1 variete;C1 producteur;C1 calibre;C1 qte;C2 variete;C2 producteur;C2 calibre;C2 qte;C3 variete;C3 producteur;C3 calibre;C3 qte
+Didier;vide;vide;vide;Test;vide;vide;vide;vide;vide;vide;vide
+vide;vide;vide;vide;vide;vide;vide;vide;vide;vide;vide;vide
+vide;vide;vide;vide;vide;vide;vide;vide;vide;vide;vide;vide
+vide;vide;vide;vide;vide;vide;vide;vide;vide;vide;vide;vide
+vide;vide;vide;vide;vide;vide;vide;vide;vide;vide;vide;vide
